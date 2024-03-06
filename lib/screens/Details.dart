@@ -49,7 +49,9 @@ class _DetailsState extends State<Details> {
       body: Center(
         child: SingleChildScrollView(
         child: recipeDetails != null
-        ? Center(
+        ? Padding(
+          padding: EdgeInsets.all(30.0),
+          child: Center(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children:[
@@ -58,14 +60,17 @@ class _DetailsState extends State<Details> {
                 width: 200,
                 height: 200,
               ),
-              SizedBox(height: 20),
+                SizedBox(height: 20),
                 Text('${recipe.name}'),
                 Text('${recipe.category}'),
                 Text('${recipe.area}'),
-                Text('${recipe.ins}'),
+                SizedBox(height: 20),
+                Text('${recipe.ins}', textAlign: TextAlign.justify)
               ]
             )
-          ): CircularProgressIndicator()
+          )
+        )
+        : CircularProgressIndicator()
         )
       )
     );

@@ -47,8 +47,8 @@ class _RandomizerState extends State<Randomizer> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Icon(Icons.loop ,size: 80),
             Text("You will make:"),
+            SizedBox(height: 10.0),
             randomRecipe != null
                 ? GestureDetector(
                   onTap: () {
@@ -59,12 +59,22 @@ class _RandomizerState extends State<Randomizer> {
                         ),
                       );
                     },
-                    child: Text(
-                      "${randomRecipe!.name}!",
-                      style: TextStyle(color: Colors.blue, decoration: TextDecoration.underline)
-                    ),
-                  )
-                : Text("What to cook today?"),
+                    child: Column(
+                    children: [
+                      Image.network(
+                        randomRecipe!.imgUrl,
+                        width: 200,
+                        height: 200,
+                      ),
+                      SizedBox(height: 8.0),
+                      Text(
+                        "${randomRecipe!.name}!",
+                        style: TextStyle(color: Colors.blue, decoration: TextDecoration.underline)
+                      ),
+                    ],
+                  ),
+                )
+              : Text("What to cook today?"),
                 SizedBox(height: 20.0),
                 ElevatedButton(
                   onPressed: displayRandomRecipe,
