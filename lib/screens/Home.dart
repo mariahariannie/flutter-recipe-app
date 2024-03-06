@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:recipe/screens/Dashboard.dart';
 import 'package:recipe/screens/Randomizer.dart';
+import 'package:recipe/screens/Settings.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -30,6 +31,14 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Text("My Recipe App"),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, Settings.routeName);
+            },
+            icon: const Icon(Icons.settings),
+          ),
+        ],
       ),
       body: _pages[pageIndex],
       bottomNavigationBar: BottomNavigationBar(
