@@ -11,7 +11,7 @@ class Bookmark extends StatefulWidget {
 }
 
 class _BookmarkState extends State<Bookmark> {
-  final Firestore db = Firestore();
+  Firestore db = Firestore();
   List<Recipe> bookmarkedRecipes = [];
 
   @override
@@ -44,12 +44,7 @@ class _BookmarkState extends State<Bookmark> {
         itemBuilder: (context, index) {
           final recipe = bookmarkedRecipes[index];
           return ListTile(
-            title: Text(
-              recipe.name,
-              style: const TextStyle(
-                color: Colors.red
-               ),
-            ),
+            title: Text(recipe.name),
             leading: const Icon(Icons.dining, color: Colors.blue),
             trailing: IconButton(
               onPressed: () async {

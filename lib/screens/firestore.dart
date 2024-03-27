@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:recipe/models/Recipe.dart';
 
 class Firestore {
-  //FirebaseFirestore db = FirebaseFirestore.instance;
   FirebaseFirestore db = FirebaseFirestore.instance;
   Map<String, bool> bookmarks = {};
   
