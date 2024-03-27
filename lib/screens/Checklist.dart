@@ -19,6 +19,12 @@ class _ChecklistState extends State<Checklist> {
     _textFieldController.clear();
   }
   
+  void _updateCheckItem(Item item) {
+    setState(() {
+      item.completed = !item.completed;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,6 +36,7 @@ class _ChecklistState extends State<Checklist> {
         children: _items.map((Item item) {
           return ListItem(
             item: item,
+            onStatusUpdate: _updateCheckItem,
           );
         }).toList(),
       ),
@@ -85,8 +92,9 @@ class _ChecklistState extends State<Checklist> {
 }
 
 class ListItem extends StatelessWidget {
-  ListItem({required this.item}) : super(key: ObjectKey(item));
+  ListItem({required this.item, required this.onStatusUpdate}) : super(key: ObjectKey(item));
 
+  final void Function(Item item) onStatusUpdate;
   final Item item;
 
   TextStyle? _getTextStyle(bool checked) {
@@ -101,12 +109,16 @@ class ListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap: () {},
+      onTap: () {
+        onStatusUpdate(item);
+      },
       leading: Checkbox(
         checkColor: Colors.greenAccent,
         activeColor: Colors.red,
         value: item.completed,
-        onChanged: (value) {},
+        onChanged: (value) {
+          onStatusUpdate(item);
+        },
       ),
       title: Row(children: <Widget>[
         Expanded(
@@ -125,103 +137,3 @@ class ListItem extends StatelessWidget {
     );
   }
 }
-
-// import 'package:flutter/material.dart';
-
-// class Checklist extends StatefulWidget {
-//   static const String routeName = "checklist";
-
-//   @override
-//   _ChecklistState createState() => _ChecklistState();
-// }
-
-// class _ChecklistState extends State<Checklist> {
-//   List<String> items = [];
-//   final TextEditingController listController = TextEditingController();
-  
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text("Grocery List")
-//       ),
-//       body: Padding(
-//         padding: const EdgeInsets.all(16.0),
-//         child: Column(
-//           children: <Widget>[
-//             CreateListTextField(),
-//             //SizedBox(height: 10.0),
-//             ElevatedButton(
-//               onPressed: AddItem,
-//               child: Text("Add to list"),
-//             ),
-//             SizedBox(height: 16.0),
-//             CreateList(),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-
-//   Widget CreateListTextField() {
-//     return Container(
-//       margin: EdgeInsets.only(bottom: 16.0),
-//       decoration: BoxDecoration(
-//       color: Colors.white,
-//       borderRadius: BorderRadius.circular(8.0),
-//     ),
-//       child: TextField(
-//         controller: listController,
-//         decoration: InputDecoration(
-//           hintText: 'Add an item',
-//           contentPadding: EdgeInsets.all(16.0),
-//         ),
-//       ),
-//     );
-//   }
-  
-//   Widget CreateList() {
-//     return Expanded(
-//         child: Column(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           children: [
-//             Padding(
-//               padding: EdgeInsets.only(top: 16.0),
-//               child: Text(
-//                 "Items",
-//                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-//               ),
-//             ),
-//             Divider(thickness: 2),
-//             Expanded(
-//             child: ListView.builder(
-//               physics: AlwaysScrollableScrollPhysics(),
-//               itemCount: items.length,
-//               itemBuilder: (context, index) {
-//                 return Card(
-//                   margin: EdgeInsets.only(top: 10.0),
-//                   elevation: 3,
-//                   child: ListTile(
-//                     title: Text(items[index]),
-//                     trailing: Icon(Icons.delete),
-//                   ),
-//                 );
-//               },
-//             ),
-//            ),
-//           ], 
-//         ),
-//     );
-//   }
-
-//   void AddItem() {
-//     String newItem = listController.text;
-//     if (newItem.isNotEmpty) {
-//       setState(() {
-//         items.add(newItem);
-//         listController.clear();
-//       });
-//     }
-//   }
-
-// }
