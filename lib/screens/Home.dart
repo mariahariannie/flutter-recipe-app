@@ -1,6 +1,7 @@
 // ignore_for_file: file_names, library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
+import 'package:recipe/screens/Bookmark.dart';
 import 'package:recipe/screens/Dashboard.dart';
 import 'package:recipe/screens/Randomizer.dart';
 import 'package:recipe/screens/Settings.dart';
@@ -16,7 +17,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int pageIndex = 0;
-  final List<Widget> _pages = [Dashboard(),/*, Bookmarks(),*/ Randomizer()];
+  final List<Widget> _pages = [Dashboard(), Bookmark(), Randomizer()];
   
   BottomNavigationBarItem _bottomNavigationBarItem(IconData icon, String label, int index) {
     return BottomNavigationBarItem(
@@ -46,7 +47,7 @@ class _HomeState extends State<Home> {
         selectedItemColor: Colors.blue,
         items: [
           _bottomNavigationBarItem(Icons.dashboard, "Dashboard", 0),
-          //_bottomNavigationBarItem(Icons.bookmark, "Bookmarks", 1),
+          _bottomNavigationBarItem(Icons.bookmark, "Bookmarks", 1),
           _bottomNavigationBarItem(Icons.loop, "Randomizer", 2),
         ],
         onTap: (index) {

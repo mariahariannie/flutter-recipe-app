@@ -1,9 +1,11 @@
 // ignore_for_file: file_names, library_private_types_in_public_api
 import 'dart:convert';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:recipe/models/Recipe.dart';
 import 'package:recipe/screens/Details.dart';
+import 'package:recipe/screens/firestore.dart';
 
 class Dashboard extends StatefulWidget {
   static const String routeName = "dashboard";
@@ -13,6 +15,7 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  Firestore db = Firestore();
   List<Recipe> recipeList = [];
   late TextEditingController _searchController;
 
@@ -69,6 +72,19 @@ class _DashboardState extends State<Dashboard> {
                         ),
                       );
                     },
+                    trailing: IconButton(
+                      onPressed: () async{
+                        db.update(
+                          FirebaseAuth.instance.currentUser!.email.toString(), recipe.name);
+                        setState(() {
+                          db.toggleBookmark(recipe);
+                          print(recipe.isBookmarked);
+                        });
+                      },
+                      icon: recipe.isBookmarked
+                    ? Icon(Icons.bookmark)
+                    : Icon(Icons.bookmark_outline),
+                    ),
                   );
                 },
               ),

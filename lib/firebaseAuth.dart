@@ -44,7 +44,7 @@ class _AuthState extends State<Auth> {
                     SizedBox(height: 80.0),
                     Icon(Icons.dinner_dining,size: 80),
                     SizedBox(height:20.0),
-                    Text("Welcome to Happy Meal!", style: TextStyle(fontSize: 30.0)),
+                    Text("Welcome to YumMeal!", style: TextStyle(fontSize: 30.0)),
                     Text("Happy cooking!", style: TextStyle(fontSize: 20.0)),
                     SizedBox(height: 50.0),
                     
