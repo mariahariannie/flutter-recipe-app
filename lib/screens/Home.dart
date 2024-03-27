@@ -45,11 +45,12 @@ class _HomeState extends State<Home> {
       body: _pages[pageIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: pageIndex,
+        unselectedItemColor: Colors.black,
         selectedItemColor: Colors.blue,
         items: [
           _bottomNavigationBarItem(Icons.dashboard, "Dashboard", 0),
           _bottomNavigationBarItem(Icons.bookmark, "Bookmarks", 1),
-           _bottomNavigationBarItem(Icons.check_box, "Checklist", 2),
+          _bottomNavigationBarItem(Icons.check_box, "Checklist", 2),
           _bottomNavigationBarItem(Icons.loop, "Randomizer", 3)
         ],
         onTap: (index) {

@@ -28,14 +28,15 @@ class _SettingsState extends State<Settings> {
           child: Column(
             children: [
               SizedBox(height: 80.0),
-                    Icon(Icons.dinner_dining,size: 80),
-                    SizedBox(height:20.0),
-                    Text("Thank you for using the App!", style: TextStyle(fontSize: 20.0)),
-                    SizedBox(height: 50.0),
+              Icon(Icons.dinner_dining,size: 80),
+              SizedBox(height:20.0),
+              Text("Thank you for using the App!", style: TextStyle(fontSize: 20.0)),
+              SizedBox(height: 50.0),
                     
               LogoutButton(
-                text: "Logout", 
-                iconData: Icons.logout, 
+                text: "Logout",
+                textColor: Colors.black,
+                iconData: Icons.logout,
                 onPressed: logout
               )
             ],

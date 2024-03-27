@@ -68,6 +68,7 @@ class _AuthState extends State<Auth> {
 
                     PrimaryButton(
                       text: "Login",
+                      textColor: Colors.black,
                       iconData: Icons.login,
                       onPressed: loginWithEmail
                     ),
@@ -143,6 +144,7 @@ class _AuthState extends State<Auth> {
 
                     PrimaryButton(
                       text: "Confirm",
+                      textColor: Colors.black,
                       iconData: Icons.login,
                       onPressed: register
                     ),
