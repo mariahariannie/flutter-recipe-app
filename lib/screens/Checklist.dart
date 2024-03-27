@@ -19,9 +19,15 @@ class _ChecklistState extends State<Checklist> {
     _textFieldController.clear();
   }
   
-  void _updateCheckItem(Item item) {
+  void _updateCheckboxStatus(Item item) {
     setState(() {
       item.completed = !item.completed;
+    });
+  }
+
+  void _deleteItem(Item item) {
+    setState(() {
+      _items.removeWhere((element) => element.name == item.name);
     });
   }
 
@@ -36,7 +42,8 @@ class _ChecklistState extends State<Checklist> {
         children: _items.map((Item item) {
           return ListItem(
             item: item,
-            onStatusUpdate: _updateCheckItem,
+            checkboxStatusUpdate: _updateCheckboxStatus,
+            removeItem: _deleteItem
           );
         }).toList(),
       ),
@@ -92,10 +99,17 @@ class _ChecklistState extends State<Checklist> {
 }
 
 class ListItem extends StatelessWidget {
-  ListItem({required this.item, required this.onStatusUpdate}) : super(key: ObjectKey(item));
-
-  final void Function(Item item) onStatusUpdate;
   final Item item;
+  final void Function(Item item) checkboxStatusUpdate;
+  final void Function(Item item) removeItem;
+
+  ListItem({
+    required this.item,
+    required this.checkboxStatusUpdate,
+    required this.removeItem
+  }) : super(key: ObjectKey(item));
+
+  
 
   TextStyle? _getTextStyle(bool checked) {
     if (!checked) return null;
@@ -110,14 +124,14 @@ class ListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       onTap: () {
-        onStatusUpdate(item);
+        checkboxStatusUpdate(item);
       },
       leading: Checkbox(
         checkColor: Colors.greenAccent,
         activeColor: Colors.red,
         value: item.completed,
         onChanged: (value) {
-          onStatusUpdate(item);
+          checkboxStatusUpdate(item);
         },
       ),
       title: Row(children: <Widget>[
@@ -131,7 +145,9 @@ class ListItem extends StatelessWidget {
             color: Colors.red,
           ),
           alignment: Alignment.centerRight,
-          onPressed: () {},
+          onPressed: () {
+            removeItem(item);
+          },
         ),
       ]),
     );
